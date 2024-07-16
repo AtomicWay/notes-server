@@ -9,19 +9,20 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 5003;
 
-const allowedOrigins = ['https://notes-server-1-30mk.onrender.com'];
 
-// Allow requests from specific frontend URLs and specify allowed methods
-app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE']
-}));
+
+// Middleware to set CORS headers
+const corsOptions = {
+  origin: 'https://notes-server-1-30mk.onrender.com', // Your frontend URL without trailing slash
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type',
+  credentials: true,
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
+app.use(cors());
+app.use(cors(corsOptions));
+
 
 // Middleware
 app.use(express.json());

@@ -9,9 +9,23 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 5003;
 
+const allowedOrigins = ['https://notes-server-1-30mk.onrender.com/', 'https://notes-server-1-30mk.onrender.com'];
+
+// Allow requests from specific frontend URLs and specify allowed methods
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+
 // Middleware
 app.use(express.json());
-app.use(cors());
+
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Define uploads directory

@@ -13,13 +13,13 @@ const port = process.env.PORT || 5003;
 
 
 
-app.use(cors(
-  {
-    origin: 'https://notes-client-roan.vercel.app/', // Your frontend URL without trailing slash
-    methods: 'GET, POST, PUT, DELETE',
+// app.use(cors(
+//   {
+//     origin: 'https://notes-client-roan.vercel.app/', // Your frontend URL without trailing slash
+//     methods: 'GET, POST, PUT, DELETE',
   
-  }
-));
+//   }
+// ));
 
 
 

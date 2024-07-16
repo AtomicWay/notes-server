@@ -13,9 +13,8 @@ const port = process.env.PORT || 5003;
 
 // Middleware to set CORS headers
 const corsOptions = {
-  origin: 'https://notes-server-1-30mk.onrender.com', // Your frontend URL without trailing slash
+  origin: 'https://notes-client-roan.vercel.app/', // Your frontend URL without trailing slash
   methods: 'GET, POST, PUT, DELETE',
-  allowedHeaders: 'Content-Type',
   credentials: true,
   optionsSuccessStatus: 200 // For legacy browser support
 };

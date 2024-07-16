@@ -15,8 +15,11 @@ const port = process.env.PORT || 5003;
 
 app.use(cors(
   {
-    origin: 'https://notes-client-1.onrender.com', // Your frontend URL without trailing slash
+    origin: '*', // Your frontend URL without trailing slash
     methods: 'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type',
+    credentials: true,
+    optionsSuccessStatus: 200 // For legacy browser support
   
   }
 ));

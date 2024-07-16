@@ -15,8 +15,7 @@ const port = process.env.PORT || 5003;
 const corsOptions = {
   origin: 'https://notes-client-roan.vercel.app/', // Your frontend URL without trailing slash
   methods: 'GET, POST, PUT, DELETE',
-  credentials: true,
-  optionsSuccessStatus: 200 // For legacy browser support
+
 };
 
 app.use(cors());

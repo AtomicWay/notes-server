@@ -9,7 +9,7 @@ const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 5003;
 
-const allowedOrigins = ['https://notes-server-1-30mk.onrender.com/', 'https://notes-server-1-30mk.onrender.com'];
+const allowedOrigins = ['https://notes-server-1-30mk.onrender.com'];
 
 // Allow requests from specific frontend URLs and specify allowed methods
 app.use(cors({

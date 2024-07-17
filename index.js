@@ -5,23 +5,7 @@ const multer = require('multer');
 const path = require('path');
 require('dotenv').config();
 const fs = require('fs');
-// Backend
-import formidable from 'formidable';
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-export default async (req, res) => {
-  const form = new formidable.IncomingForm();
-  form.uploadDir = "./";
-  form.keepExtensions = true;
-  form.parse(req, (err, fields, files) => {
-    console.log(err, fields, files);
-  });
-};
 
 const app = express();
 const port = process.env.PORT || 5003;

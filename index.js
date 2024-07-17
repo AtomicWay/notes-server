@@ -5,6 +5,23 @@ const multer = require('multer');
 const path = require('path');
 require('dotenv').config();
 const fs = require('fs');
+// Backend
+import formidable from 'formidable';
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async (req, res) => {
+  const form = new formidable.IncomingForm();
+  form.uploadDir = "./";
+  form.keepExtensions = true;
+  form.parse(req, (err, fields, files) => {
+    console.log(err, fields, files);
+  });
+};
 
 const app = express();
 const port = process.env.PORT || 5003;
@@ -13,16 +30,12 @@ const port = process.env.PORT || 5003;
 
 
 
-app.use(cors(
-  {
-    origin: '*', // Your frontend URL without trailing slash
-    methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type',
-    credentials: true,
-    optionsSuccessStatus: 200 // For legacy browser support
-  
-  }
-));
+const corsOptions = {
+  origin: 'https://notes-client-roan.vercel.app'
+};
+
+app.use(cors(corsOptions));
+
 
 
 

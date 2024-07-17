@@ -1,3 +1,4 @@
+const multer = require('multer');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -79,9 +80,18 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
-  storage: storage ,
-limits: { fileSize: 5 * 1024 * 1024 } // 5MB file size limit
+const upload = multer({
+  dest: 'uploads/', 
+  fileFilter: (req, file, cb) => {
+    // Example: Allow only PDF files
+    if (file.mimetype !== 'application/pdf') {
+      return cb(new Error('Only PDF files are allowed'));
+    }
+    cb(null, true);
+  },
+  limits: {
+    fileSize: 1024 * 1024 * 10 // 10 MB limit
+  }
 });
 
 // Routes

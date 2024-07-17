@@ -1,4 +1,3 @@
-const multer = require('multer');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -42,6 +41,7 @@ app.use('/uploads', express.static(uploadsDir));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
+  
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

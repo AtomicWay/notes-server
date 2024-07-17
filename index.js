@@ -41,7 +41,6 @@ app.use('/uploads', express.static(uploadsDir));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
-  
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -80,18 +79,9 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({
-  dest: 'uploads/', 
-  fileFilter: (req, file, cb) => {
-    // Example: Allow only PDF files
-    if (file.mimetype !== 'application/pdf') {
-      return cb(new Error('Only PDF files are allowed'));
-    }
-    cb(null, true);
-  },
-  limits: {
-    fileSize: 1024 * 1024 * 10 // 10 MB limit
-  }
+const upload = multer({ 
+  storage: storage ,
+limits: { fileSize: 5 * 1024 * 1024 } // 5MB file size limit
 });
 
 // Routes

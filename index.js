@@ -15,7 +15,7 @@ const port = process.env.PORT || 5003;
 
 app.use(cors(
   {
-    origin: 'https://notes-client-1.onrender.com/', // Your frontend URL without trailing slash
+    origin: '*', // Your frontend URL without trailing slash
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type',
     credentials: true,
@@ -24,31 +24,6 @@ app.use(cors(
   }
 ));
 
-// File download with CORS header
-app.get('/download/:filename', (req, res) => {
-  const { filename } = req.params;
-  const filePath = path.join(uploadsDir, filename);
-
-  if (fs.existsSync(filePath)) {
-    res.setHeader('Content-Type', 'application/octet-stream');
-    res.setHeader('Content-Disposition', `attachment; filename=${filename}`);
-    res.setHeader('Access-Control-Allow-Origin', 'https://notes-server-1-30mk.onrender.com'); // Include this CORS header
-
-    const fileStream = fs.createReadStream(filePath);
-    fileStream.pipe(res);
-  } else {
-    res.status(404).json({ message: 'File not found' });
-  }
-});
-
-// Additional CORS headers for other routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://notes-server-1-30mk.onrender.com/'); // Specify the allowed origin
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  next();
-});
 
 
 
